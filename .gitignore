@@ -1,0 +1,26 @@
+# Maven target directory (build output)
+target/
+
+# Maven generated files
+dependency-reduced-pom.xml
+
+# Eclipse files (optional)
+.classpath
+.project
+.settings/
+
+# IntelliJ IDEA files (optional)
+*.iml
+.idea/
+
+# VS Code files (optional)
+.vscode/
+
+# MacOS files
+.DS_Store
+
+# Windows thumbnail cache
+Thumbs.db
+
+# Logs and temp files
+*.log
