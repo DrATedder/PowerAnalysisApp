@@ -1,7 +1,40 @@
 # PowerAnalysisApp
+
+Takes the output file from [GEO_EffectSizeApp](https://github.com/DrATedder/GEO_EffectSizeApp) (example data shown below) and estimates sample size per group for 80% power (at median |d|). A plot is also provided.
+
+Apre-compiled `jar` file can be found in [Releases](https://github.com/DrATedder/PowerAnalysisApp/releases)
+
+
+## Build and Run
+###Requirements
+ - Java 8 or higher
+ - Maven 3+
+
+### Build from source
+```bash
+git clone https://github.com/DrATedder/PowerAnalysisApp.git
+cd PowerAnalysisApp
+mvn clean package
+```
+
+This will generate a runnable `jar` file located at:
+
+```bash
+target/PowerAnalysisApp-1.0.jar
+```
+
+### Run the App
+Make sure your terminal is in the root of the repo or that `gene_effects.csv` (your data file - see example below) is accessible, then:
+
+```bash
+java -jar target/PowerAnalysisApp-1.0.jar
+```
+
+**Note.** Your data file must be called `gene_effects.csv`, and it must be in the same location you launch the App from.
+
 ---
 
-## Example data file
+### Example data file
 
 | ProbeID       | Cohens_d | Category |
 |---------------|----------|----------|
