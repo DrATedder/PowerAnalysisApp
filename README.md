@@ -6,7 +6,7 @@ Apre-compiled `jar` file can be found in [Releases](https://github.com/DrATedder
 
 
 ## Build and Run
-###Requirements
+### Requirements
  - Java 8 or higher
  - Maven 3+
 
