@@ -1,64 +1,146 @@
-# PowerAnalysisApp
+<h1>Power Analysis with PowerAnalysisApp</h1>
 
-Takes the output file from [GEO_EffectSizeApp](https://github.com/DrATedder/GEO_EffectSizeApp) (example data shown below) and estimates sample size per group for 80% power (at median |d|). A plot is also provided.
+<div class="callout">
+  <strong>Purpose:</strong> Estimate statistical power and required sample size for a given effect size distribution.
+</div>
 
-Apre-compiled `jar` file can be found in [Releases](https://github.com/DrATedder/PowerAnalysisApp/releases)
+<h2>1. Introduction and Rationale</h2>
+<p>
+<strong>PowerAnalysisApp</strong> is a Java-based desktop application that helps researchers assess the statistical power of experimental designs. It is particularly useful in planning studies that compare groups using effect sizes (Cohen's <em>d</em>).
+</p>
+<p>
+This app reads a CSV file of effect sizes, calculates key statistics like the median absolute Cohen’s <em>d</em>, and estimates the sample size needed to achieve a user-defined power level. A visual power curve is also generated.
+</p>
 
+<h2>2. Builhding and Installing</h2>
+<details open>
+  <summary>Getting PowerAnalysisApp</summary>
+  <p>The easiest way to get <code>PowerAnalysisApp</code> is to download a pre-compiled version. You can download directly at <a href="https://github.com/DrATedder/PowerAnalysisApp/releases/tag/v0.1.1" target="_blank">Releases</a>.</p>
+  
+   <p>Alternatively, follow these simple steps:</p>
+  <p>1. Clone the git repository</p>
+  <pre><code>
+   git clone https://github.com/DrATedder/PowerAnalysisApp.git
+  </code></pre>
+  <p>
+   2. Navigate to the directory
+  </p>
+  <pre><code>
+  cd PowerAnalysisApp
+  </code></pre>
+  <p>
+   3. Compile the package using <code>maven</code>
+  </p>
+  <pre><code>
+   mvn clean package
+  </code></pre>
+  <p>
+   4. Run the package (alternatively, you can 'double click' if your system allows it)
+  </p>
+  <pre><code>
+  java -jar PowerAnalysisApp
+ </code></pre>
+</details>  
 
-## Build and Run
-### Requirements
- - Java 8 or higher
- - Maven 3+
+<h2>2. Input Data Format</h2>
+<details open>
+  <summary>Required CSV Structure</summary>
+  <p>The input file must include a header row with the following columns:</p>
+  <table>
+    <thead>
+      <tr><th>Column</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>ProbeID</code></td><td>Unique identifier for each gene or feature</td></tr>
+      <tr><td><code>Cohens_d</code></td><td>Effect size estimate (Cohen’s <em>d</em>)</td></tr>
+    </tbody>
+  </table>
+</details>
 
-### Build from source
-```bash
-git clone https://github.com/DrATedder/PowerAnalysisApp.git
-cd PowerAnalysisApp
-mvn clean package
-```
+<h2>3. Running the Application</h2>
+<details open>
+  <summary>Step 1: Launch the App</summary>
+  <ul>
+    <li>Double-click the <code>PowerAnalysisApp.jar</code> file (Java 8+ required).</li>
+    <li>If it doesn’t start, try running from the command line:<br>
+      <code>java -jar PowerAnalysisApp.jar</code></li>
+  </ul>
+</details>
 
-This will generate a runnable `jar` file located at:
+<details>
+  <summary>Step 2: Select Your CSV File</summary>
+  <p>Click the <strong>Select CSV File</strong> button and choose your input file.</p>
+</details>
 
-```bash
-target/PowerAnalysisApp-1.0.jar
-```
+<details>
+  <summary>Step 3: Set Analysis Parameters</summary>
+  <ul>
+    <li><strong>Significance Level (alpha):</strong> e.g. 0.05</li>
+    <li><strong>Desired Power:</strong> e.g. 0.8 (80%)</li>
+    <li><strong>Group Ratio:</strong> e.g. 1.0 for equal-sized groups</li>
+  </ul>
+</details>
 
-### Run the App
-Make sure your terminal is in the root of the repo or that `gene_effects.csv` (your data file - see example below) is accessible, then:
+<details>
+  <summary>Step 4: Run the Analysis</summary>
+  <p>Click <strong>Run Analysis</strong> to perform the power calculation.</p>
+</details>
 
-```bash
-java -jar target/PowerAnalysisApp-1.0.jar
-```
+<h2>4. Output and Interpretation</h2>
+<p>Once the analysis completes, you will see:</p>
+<ul>
+  <li><strong>Median Cohen's <em>d</em>:</strong> Typical effect size in your dataset</li>
+  <li><strong>Adjusted alpha:</strong> Alpha corrected for multiple comparisons (Bonferroni)</li>
+  <li><strong>Estimated Sample Size:</strong> Number of subjects per group needed to achieve your desired power</li>
+</ul>
 
-**Note.** Your data file must be called `gene_effects.csv`, and it must be in the same location you launch the App from.
+<div class="highlight">
+  The app uses absolute values of Cohen’s <em>d</em> and assumes a two-sample comparison with a t-test framework.
+</div>
 
----
+<h2>5. Power Curve Plot</h2>
+<p>
+After analysis, a plot window opens showing a curve of statistical power across a range of sample sizes.
+</p>
 
-### Example data file
+<details open>
+  <summary>Saving the Plot</summary>
+  <ul>
+    <li>Click <strong>Save Plot as PNG</strong> to export the chart for use in reports or publications.</li>
+  </ul>
+</details>
 
-| ProbeID       | Cohens_d | Category |
-|---------------|----------|----------|
-| 227482_at     | 17.22634 | Large    |
-| 203502_at     | -15.61002| Large    |
-| 230570_at     | 12.49057 | Large    |
-| 207558_s_at   | 11.09673 | Large    |
-| 1552578_a_at  | -10.21937| Large    |
-| 221654_s_at   | 10.18819 | Large    |
-| 228835_at     | 10.10982 | Large    |
-| 1556180_at    | 9.81471  | Large    |
-| 213809_x_at   | -9.35721 | Large    |
-| 224932_at     | 9.03993  | Large    |
-| 219439_at     | 8.98547  | Large    |
-| 237277_at     | 8.97979  | Large    |
-| 223031_s_at   | -8.95543 | Large    |
-| 1557262_at    | -8.56092 | Large    |
-| 200951_s_at   | -8.40069 | Large    |
-| 1569631_at    | 8.22730  | Large    |
-| 232524_x_at   | -8.21831 | Large    |
-| 222997_s_at   | 8.13227  | Large    |
-| 232508_at     | -7.88716 | Large    |
-| 211948_x_at   | -7.81233 | Large    |
-| 219039_at     | -7.79868 | Large    |
-| 202194_at     | 7.76793  | Large    |
-| 204686_at     | 7.33897  | Large    |
+<h2>6. Best Practices</h2>
+<table>
+  <thead>
+    <tr><th>Component</th><th>Recommendation</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Effect Size Source</td><td>Use pilot data or prior literature</td></tr>
+    <tr><td>Alpha</td><td>Start with 0.05, adjust for multiple testing if needed</td></tr>
+    <tr><td>Power Threshold</td><td>Use ≥ 0.8 for most studies</td></tr>
+    <tr><td>Group Ratio</td><td>Use 1.0 unless unequal sampling is expected</td></tr>
+  </tbody>
+</table>
 
+<h2>7. Limitations</h2>
+<ul>
+  <li>Assumes normally distributed data</li>
+  <li>Currently supports one effect size column only</li>
+  <li>No support for paired or longitudinal designs</li>
+</ul>
+
+<h2>8. Getting Help</h2>
+<ul>
+  <li>For issues or suggestions, open a GitHub issue at:<br>
+    <a href="https://github.com/DrATedder/PowerAnalysisApp/issues" target="_blank">
+      https://github.com/DrATedder/PowerAnalysisApp/issues</a></li>
+</ul>
+
+<h2>9. Credits</h2>
+<p>
+This tool was developed and maintained by <a href="https://github.com/DrATedder" target="_blank">DrATedder</a>. Contributions welcome!
+</p>
+
+</body>
+</html>
