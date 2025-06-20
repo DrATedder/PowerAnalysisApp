@@ -35,10 +35,14 @@ This app reads a CSV file of effect sizes, calculates key statistics like the me
    mvn clean package
   </code></pre>
   <p>
-   4. Run the package (alternatively, you can 'double click' if your system allows it)
+   4. Navigate to the directory 
+  </p>
+  <pre><code>cd target</code></pre>
+  <p>
+   5. Run the package (alternatively, you can 'double click' if your system allows it)
   </p>
   <pre><code>
-  java -jar PowerAnalysisApp
+  java -jar PowerAnalysisApp-1.0.jar
  </code></pre>
 </details>  
 
